@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="star_list_divider_right_margin">16dp</dimen>
+    <dimen name="star_list_divider_left_margin">16dp</dimen>
+    <dimen name="boom_menu_redius">28dp</dimen>
+</resources>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
+
+
+    <FrameLayout
+        android:id="@+id/translate_from_container"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/icon_translate"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.stardust.ooxx.widget.UnderlineLayout
+            android:id="@+id/translate_from_underline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="1dp">
+
+            <TextView
+                android:id="@+id/text_translate_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="@string/cn"
+                android:textColor="@color/colorTitleText"
+                android:textSize="18sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/icon_translate"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </com.stardust.ooxx.widget.UnderlineLayout>
+    </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/icon_select_source_format"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/arrow_down"
+        android:tint="@color/colorTitleText"
+        app:layout_constraintBottom_toBottomOf="@+id/translate_from_container"
+        app:layout_constraintLeft_toRightOf="@+id/translate_from_container"
+        app:layout_constraintTop_toTopOf="@+id/translate_from_container"/>
+
+    <ImageView
+        android:id="@+id/icon_translate"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center_vertical"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="20dp"
+        android:src="@drawable/translation"
+        android:tint="@color/colorTitleText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <FrameLayout
+        android:id="@+id/translate_to_container"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        app:layout_constraintLeft_toRightOf="@+id/icon_translate"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.stardust.ooxx.widget.UnderlineLayout
+            android:id="@+id/translate_to_underline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="1dp">
+
+            <TextView
+                android:id="@+id/text_translate_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:text="@string/ooxx"
+                android:textColor="@color/colorTitleText"
+                android:textSize="18sp"
+                />
+
+        </com.stardust.ooxx.widget.UnderlineLayout>
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/icon_select_target_language"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/arrow_down"
+        android:tint="@color/colorTitleText"
+        app:layout_constraintBottom_toBottomOf="@+id/translate_to_container"
+        app:layout_constraintLeft_toRightOf="@+id/translate_to_container"
+        app:layout_constraintTop_toTopOf="@+id/translate_to_container"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_translate"/>
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/bmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:bmb_buttonEnum="textInsideCircle"
+        app:bmb_buttonPlaceEnum="buttonPlace_sc_3_1"
+        app:bmb_normalColor="@color/colorAccent"
+        app:bmb_piecePlaceEnum="piecePlace_dot_3_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

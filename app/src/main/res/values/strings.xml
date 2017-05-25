@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ooxx</string>
+    <string name="star">收藏</string>
+    <string name="cn">中文</string>
+    <string name="en">英文</string>
+    <string name="word">单词</string>
+    <string name="ooxx">OOXX</string>
+    <string name="translate">转换</string>
+    <string name="fav">收藏</string>
+    <string name="clear">清空</string>
+    <string name="edit">编辑</string>
+    <string name="already_fav">已收藏</string>
+    <string name="interval_char">间隔字符</string>
+    <string name="settings">设置</string>
+    <string name="x">X</string>
+    <string name="save">保存</string>
+    <string name="input_title">标题</string>
+</resources>

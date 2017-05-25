@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fff0cf</color>
+    <color name="colorPrimaryDark">#fff0cf</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorBottomBarSelected">#2196f3</color>
+    <color name="colorBottomBarNormal">#7f8393</color>
+    <color name="colorTitleText">#db7d6d</color>
+    <color name="colorText">#e0db7d6d</color>
+    <color name="colorTextThirdly">#ccdb7d6d</color>
+    <color name="star_list_divider_color">#d3d4d9</color>
+    <color name="colorMenuFav">#f44336</color>
+    <color name="colorMenuConvert">#03a9f4</color>
+    <color name="colorMenuClear">#673ab7</color>
+    <color name="colorBubbleBg">#ddffe082</color>
+</resources>

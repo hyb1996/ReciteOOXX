@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/format_cn"
+        android:orderInCategory="100"
+        android:title="@string/cn"/>
+
+    <item
+        android:id="@+id/format_en"
+        android:orderInCategory="200"
+        android:title="@string/en"/>
+
+    <item
+        android:id="@+id/format_word"
+        android:orderInCategory="300"
+        android:title="@string/word"/>
+
+</menu>
