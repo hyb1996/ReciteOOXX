@@ -6,69 +6,203 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true">
 
-
-    <TextView
-        android:id="@+id/title_star"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:gravity="center"
-        android:text="@string/star"
-        android:textColor="@color/colorTitleText"
-        android:textSize="18sp"
+    <ViewSwitcher
+        android:id="@+id/title_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inAnimation="@android:anim/slide_in_left"
+        android:outAnimation="@android:anim/slide_out_right"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/arrow_down"
-        android:tint="@color/colorTitleText"
-        app:layout_constraintBottom_toBottomOf="@+id/title_star"
-        app:layout_constraintLeft_toRightOf="@+id/title_star"
-        app:layout_constraintTop_toTopOf="@+id/title_star"/>
+        <ViewSwitcher
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inAnimation="@anim/slide_in_right"
+            android:outAnimation="@android:anim/slide_out_right">
 
-    <ImageView
-        android:id="@+id/search"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="center_vertical"
-        android:padding="16dp"
-        android:src="@drawable/search"
-        android:tint="@color/colorTitleText"
-        app:layout_constraintBottom_toBottomOf="@+id/title_star"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title_star"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+
+                <ImageView
+                    android:id="@+id/sort"
+                    android:layout_width="48dp"
+                    android:layout_height="56dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center_vertical"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/sort"
+                    android:tint="?attr/colorTitleText"/>
+
+                <LinearLayout
+                    android:id="@+id/title_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="@string/star"
+                        android:textColor="?attr/colorTitleText"
+                        android:textSize="18sp"/>
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/arrow_down"
+                        android:tint="?attr/colorTitleText"/>
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center_vertical"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/search"
+                    android:tint="?attr/colorTitleText"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/cancel_search"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/close"
+                    android:tint="?attr/colorTitleText"/>
+
+                <EditText
+                    android:id="@+id/search_box"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:hint="@string/search"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="?attr/colorText"
+                    android:textColorHint="?attr/colorDisabled"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/done"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/done"
+                    android:tint="?attr/colorTitleText"/>
+
+            </LinearLayout>
+
+        </ViewSwitcher>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_vertical"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="16dp"
+                android:src="@drawable/close"
+                android:tint="?attr/colorTitleText"/>
+
+
+            <ImageView
+                android:id="@+id/select_all"
+                android:layout_width="54dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="108dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="16dp"
+                android:src="@drawable/select_all"
+                android:tint="@color/button_color_selector"/>
+
+            <ImageView
+                android:id="@+id/rename"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="56dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="16dp"
+                android:src="@drawable/rename"
+                android:tint="@color/button_color_selector"/>
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="14dp"
+                android:src="@drawable/delete"
+                android:tint="@color/button_color_selector"/>
+
+        </RelativeLayout>
+    </ViewSwitcher>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/star_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_star"/>
+        app:layout_constraintTop_toBottomOf="@+id/title_bar"/>
 
     <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/spin_kit"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
         style="@style/SpinKitView.Large.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/colorAccent"
+        app:SpinKit_Color="?attr/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_star"/>
+        app:layout_constraintTop_toBottomOf="@+id/title_bar"/>
 
 </android.support.constraint.ConstraintLayout>

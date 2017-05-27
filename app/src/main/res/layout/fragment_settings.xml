@@ -14,10 +14,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/settings"
-            android:textColor="@color/colorTitleText"
-            android:textSize="16sp"/>
+            android:textColor="?attr/colorTitleText"
+            android:textSize="18sp"/>
 
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +37,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/interval_char"
-            android:textColor="@color/colorText"
+            android:textColor="?attr/colorText"
             android:textSize="16sp"/>
 
         <EditText
@@ -41,17 +46,9 @@
             android:background="@android:color/transparent"
             android:gravity="center_vertical"
             android:text="@string/x"
-            android:textColor="@color/colorText"
+            android:textColor="?attr/colorText"
             android:textSize="16sp"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:text="@string/interval_char"
-        android:textColor="@color/colorText"
-        android:textSize="16sp"/>
 
 </LinearLayout>

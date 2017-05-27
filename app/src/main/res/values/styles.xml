@@ -1,12 +1,70 @@
 <resources>
 
+    <attr name="colorTitleText" format="color"/>
+    <attr name="colorText" format="color"/>
+    <attr name="colorTextThirdly" format="color"/>
+    <attr name="colorBubbleBg" format="color"/>
+    <attr name="colorDisabled" format="color"/>
+    <attr name="bottomSheetBg" format="color"/>
+    <attr name="windowBg" format="color"></attr>
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="colorTitleText">@color/colorTitleText</item>
+        <item name="colorText">@color/colorText</item>
+        <item name="colorTextThirdly">@color/colorTextThirdly</item>
+        <item name="colorBubbleBg">@color/colorBubbleBg</item>
+        <item name="colorDisabled">@color/colorDisabled</item>
+        <item name="bottomSheetBg">@color/colorPrimary</item>
+        <item name="windowBg">@color/colorPrimary</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+
         <item name="android:textColorPrimary">@color/colorTitleText</item>
+
+
+        <item name="preferenceTheme">@style/AppTheme.Pref</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="BlackAppTheme" parent="AppTheme">
+
+        <item name="colorTitleText">#ffffff</item>
+        <item name="colorText">#ddffffff</item>
+        <item name="colorTextThirdly">#aaffffff</item>
+        <item name="colorBubbleBg">#77000000</item>
+        <item name="colorDisabled">#44d2d2d2</item>
+        <item name="bottomSheetBg">#343537</item>
+        <item name="windowBg">#424242</item>
+        <item name="colorPrimary">#424242</item>
+        <item name="colorPrimaryDark">#424242</item>
+        <item name="colorAccent">#2196f3</item>
+        <item name="android:textColorPrimary">?attr/colorTitleText</item>
+    </style>
+
+    <style name="WhiteAppTheme" parent="AppTheme">
+
+        <item name="colorTitleText">#000000</item>
+        <item name="colorText">#dd000000</item>
+        <item name="colorTextThirdly">#aa000000</item>
+        <item name="colorBubbleBg">#aaa2a3a5</item>
+        <item name="colorDisabled">#44000000</item>
+        <item name="bottomSheetBg">#aafefefe</item>
+        <item name="windowBg">#ffffff</item>
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#000000</item>
+        <item name="android:textColorPrimary">?attr/colorTitleText</item>
+    </style>
+
+
+    <style name="AppTheme.Pref" parent="PreferenceThemeOverlay">
+        <item name="colorAccent">@color/colorTitleText</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
+    </style>
+
 
 </resources>

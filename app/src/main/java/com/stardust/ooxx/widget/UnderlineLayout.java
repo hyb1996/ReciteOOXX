@@ -3,11 +3,13 @@ package com.stardust.ooxx.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.widget.FrameLayout;
 
 import com.stardust.ooxx.R;
@@ -39,7 +41,9 @@ public class UnderlineLayout extends FrameLayout {
 
     private void init() {
         setWillNotDraw(false);
-        mLinePaint.setColor(getResources().getColor(R.color.colorTitleText));
+        TypedValue a = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.colorTitleText, a, true);
+        mLinePaint.setColor(a.data);
     }
 
     @Override

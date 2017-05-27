@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/translation_setting">
+
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:defaultValue="@string/x"
+            android:key="@string/key_interval_char"
+            android:title="@string/interval_char"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/appearance">
+
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
+            android:key="@string/key_theme"
+            android:entries="@array/themes"
+            android:entryValues="@array/theme_values"
+            android:title="@string/theme"/>
+
+        <Preference
+            android:title="@string/background"/>
+
+        <Preference
+            android:title="@string/reset_background"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/author">
+
+        <Preference
+            android:title="@string/arr"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/version">
+
+        <Preference
+            android:title="@string/djjzb"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/source">
+
+        <Preference
+            android:title="@string/web_version"/>
+
+        <Preference
+            android:title="@string/zhihu"/>
+    </PreferenceCategory>
+</PreferenceScreen>

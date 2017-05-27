@@ -42,7 +42,7 @@ public class SimpleRecyclerViewAdapter<M, VH extends BindableViewHolder<M>> exte
     @Override
     public void onBindViewHolder(VH holder, int position) {
         M m = mDataList.get(position);
-        holder.bind(m);
+        holder.bind(m, position);
     }
 
     @Override
@@ -50,5 +50,8 @@ public class SimpleRecyclerViewAdapter<M, VH extends BindableViewHolder<M>> exte
         return mDataList.size();
     }
 
-
+    public void add(M m) {
+        mDataList.add(m);
+        notifyItemInserted(mDataList.size() - 1);
+    }
 }

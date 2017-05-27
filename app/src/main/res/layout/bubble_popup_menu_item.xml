@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:textColor="@color/colorTitleText"
+        android:textColor="?attr/colorTitleText"
         android:textSize="15sp"
         tools:text="OOXX"/>
 

@@ -12,5 +12,5 @@ public abstract class BindableViewHolder<M> extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public abstract void bind(M m);
+    public abstract void bind(M m, int position);
 }

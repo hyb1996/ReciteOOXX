@@ -1,6 +1,6 @@
 package com.stardust.ooxx;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -64,6 +64,7 @@ public class EditFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSourceTextSubscription.unsubscribe();
+        if (mSourceTextSubscription != null)
+            mSourceTextSubscription.unsubscribe();
     }
 }

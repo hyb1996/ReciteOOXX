@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ooxx</string>
+    <string name="app_name">OOXX</string>
     <string name="star">收藏</string>
     <string name="cn">中文</string>
     <string name="en">英文</string>
@@ -15,4 +15,38 @@
     <string name="x">X</string>
     <string name="save">保存</string>
     <string name="input_title">标题</string>
+    <string name="saved">保存成功</string>
+    <string name="rename">重命名</string>
+    <string name="renamed">重命名成功</string>
+    <string name="about">关于</string>
+    <string name="translation_setting">转换</string>
+    <string name="key_interval_char">key_interval_char</string>
+    <string name="author">软件作者</string>
+    <string name="arr">星尘幻影</string>
+    <string name="version">版本</string>
+    <string name="djjzb">Version 0.9.1 BS</string>
+    <string name="lol">略略略(｡•ˇ‸ˇ•｡)</string>
+    <string name="djjh">(ง •_•)ง</string>
+    <string name="source">方法来源</string>
+    <string name="web_version">网页版</string>
+    <string name="zhihu">知乎: 如何成为记忆高手？—— 白诗诗的回答</string>
+    <string name="add">新建</string>
+    <string name="search">搜索...</string>
+    <string name="new_tag">新建收藏夹</string>
+    <string name="text_select_image">请选择图片(⺣◡⺣)</string>
+    <string name="appearance">外观</string>
+    <string name="background">背景</string>
+    <string name="theme">主题</string>
+    <string name="key_theme">key_theme</string>
+    <string name="reset_background">重置背景设置</string>
+    <string-array name="themes">
+        <item>黄色</item>
+        <item>白色</item>
+        <item>黑色</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>yellow</item>
+        <item>white</item>
+        <item>black</item>
+    </string-array>
 </resources>

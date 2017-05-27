@@ -1,6 +1,6 @@
 package com.stardust.ooxx;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
@@ -46,6 +46,9 @@ public class TranslationResultFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mTranslationResultSubscription.unsubscribe();
+        if (mTranslationResultSubscription != null)
+            mTranslationResultSubscription.unsubscribe();
+
     }
+
 }

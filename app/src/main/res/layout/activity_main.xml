@@ -6,7 +6,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="?attr/windowBg"
     android:fitsSystemWindows="true"
     tools:context="com.stardust.ooxx.MainActivity">
 
@@ -22,8 +22,8 @@
     <View
         android:id="@+id/bottom_bar_divider"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="#d5dbde"
+        android:layout_height="0.8dp"
+        android:background="#ddd5dbde"
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar_settings"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -35,7 +35,7 @@
         android:padding="12dp"
         android:scaleType="fitCenter"
         android:src="@drawable/global"
-        android:tint="@color/colorBottomBarSelected"
+        android:tint="?attr/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -69,3 +69,4 @@
         app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
+

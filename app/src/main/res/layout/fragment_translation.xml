@@ -6,7 +6,6 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true">
 
 
@@ -32,7 +31,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:text="@string/cn"
-                android:textColor="@color/colorTitleText"
+                android:textColor="?attr/colorTitleText"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/icon_translate"
@@ -52,7 +51,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:padding="4dp"
         android:src="@drawable/arrow_down"
-        android:tint="@color/colorTitleText"
+        android:tint="?attr/colorTitleText"
         app:layout_constraintBottom_toBottomOf="@+id/translate_from_container"
         app:layout_constraintLeft_toRightOf="@+id/translate_from_container"
         app:layout_constraintTop_toTopOf="@+id/translate_from_container"/>
@@ -65,7 +64,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:padding="20dp"
         android:src="@drawable/translation"
-        android:tint="@color/colorTitleText"
+        android:tint="?attr/colorTitleText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -93,7 +92,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:text="@string/ooxx"
-                android:textColor="@color/colorTitleText"
+                android:textColor="?attr/colorTitleText"
                 android:textSize="18sp"
                 />
 
@@ -111,7 +110,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:padding="4dp"
         android:src="@drawable/arrow_down"
-        android:tint="@color/colorTitleText"
+        android:tint="?attr/colorTitleText"
         app:layout_constraintBottom_toBottomOf="@+id/translate_to_container"
         app:layout_constraintLeft_toRightOf="@+id/translate_to_container"
         app:layout_constraintTop_toTopOf="@+id/translate_to_container"/>
@@ -132,7 +131,7 @@
         android:layout_margin="16dp"
         app:bmb_buttonEnum="textInsideCircle"
         app:bmb_buttonPlaceEnum="buttonPlace_sc_3_1"
-        app:bmb_normalColor="@color/colorAccent"
+        app:bmb_normalColor="?attr/colorAccent"
         app:bmb_piecePlaceEnum="piecePlace_dot_3_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

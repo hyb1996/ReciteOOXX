@@ -40,6 +40,7 @@ public class BubblePopupMenu extends PopupWindow {
         setContentView(view);
         setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setOutsideTouchable(true);
+        setFocusable(true);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -65,7 +66,7 @@ public class BubblePopupMenu extends PopupWindow {
         }
 
         @Override
-        public void bind(String s) {
+        public void bind(String s, int position) {
             mOption.setText(s);
         }
     }

@@ -1,24 +1,26 @@
 package com.stardust.ooxx;
 
+import android.app.Fragment;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.Util;
-import com.stardust.ooxx.app.FragmentPagerAdapterBuilder;
-import com.stardust.ooxx.data.Translation;
+import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
+import com.stardust.app.FragmentPagerAdapterBuilder;
 import com.stardust.ooxx.data.TranslationService;
 import com.stardust.ooxx.module.Passage;
 import com.stardust.ooxx.widget.BubblePopupMenu;
+import com.stardust.ooxx.widget.TitleInputAndTagSelectBottomSheetBuilder;
 import com.stardust.ooxx.widget.UnderlineLayout;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,13 +28,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.LongClick;
 import org.androidannotations.annotations.ViewById;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.List;
+import java.util.Set;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -44,7 +43,7 @@ import rx.functions.Action1;
 public class TranslationFragment extends Fragment {
 
     private static final List<String> OOXX_OPTIONS = Arrays.asList("XXXX", "OXOX", "OOXX", "OOOX", "OOOO");
-    private static final int[] FORMAT_OPTIONS = {R.string.cn, R.string.en, R.string.word};
+    private static final String LOG_TAG = TranslationFragment.class.getSimpleName();
 
     @ViewById(R.id.view_pager)
     ViewPager mViewPager;
@@ -64,18 +63,16 @@ public class TranslationFragment extends Fragment {
     @ViewById(R.id.text_translate_from)
     TextView mSourceFormat;
 
-    private List<String> mFormatOptions = new ArrayList<>();
-
+    private final TranslationService mTranslationService = TranslationService.getInstance();
+    private BubblePopupMenu mShowingMenu;
+    private List<String> mFormatOptions = mTranslationService.getFormatOptions();
 
     @AfterViews
     void setUpUI() {
         setUpViewPager();
         setUpBoomMenu();
-        for (int i : FORMAT_OPTIONS) {
-            mFormatOptions.add(getString(i));
-        }
-        setOOXXInterval(TranslationService.getInstance().getOOXXInterval());
-        setSourceFormat(TranslationService.getInstance().getSourceFormat());
+        setOOXXInterval(mTranslationService.getOOXXInterval());
+        setSourceFormat(mTranslationService.getSourceFormat());
     }
 
     private void setUpBoomMenu() {
@@ -87,19 +84,12 @@ public class TranslationFragment extends Fragment {
             }
         });
         mBoomMenuButton.addBuilder(firstButton);
-        final TextInsideCircleButton.Builder secondButton = buildMenuButton(R.drawable.convert, R.color.colorMenuConvert, R.string.translate);
+        final TextInsideCircleButton.Builder secondButton = buildMenuButton(R.drawable.add, R.color.colorMenuConvert, R.string.add);
         secondButton.listener(new OnBMClickListener() {
             @Override
             public void onBoomButtonClick(int index) {
-                if (mViewPager.getCurrentItem() == 0) {
-                    showTranslationResultPage();
-                    secondButton.normalImageRes(R.drawable.ic_border_color_white_48dp);
-                    secondButton.normalTextRes(R.string.edit);
-                } else {
-                    showSourceTextPage();
-                    secondButton.normalImageRes(R.drawable.convert);
-                    secondButton.normalTextRes(R.string.translate);
-                }
+                mTranslationService.clearSourceText();
+                mTranslationService.clearCurrentPassage();
             }
         });
         mBoomMenuButton.addBuilder(secondButton);
@@ -107,26 +97,54 @@ public class TranslationFragment extends Fragment {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        TranslationService.getInstance().clearSourceText();
+                        mTranslationService.clearSourceText();
                     }
                 }));
     }
 
     private void save() {
-        if (TranslationService.getInstance().getCurrentPassageId() != Passage.NO_ID) {
-            TranslationService.getInstance().saveCurrentPassage();
+        if (mTranslationService.getCurrentPassageId() != Passage.NO_ID) {
+            mTranslationService.saveCurrentPassage()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<PutResult>() {
+                        @Override
+                        public void call(PutResult result) {
+                            if (result.wasUpdated()) {
+                                Toast.makeText(getActivity(), R.string.saved, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
             return;
         }
+        insertNewPassage();
+    }
 
-        new MaterialDialog.Builder(getActivity())
-                .title(R.string.input_title)
-                .input("", "", new MaterialDialog.InputCallback() {
+    private void insertNewPassage() {
+        final BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+        dialog.setContentView(new TitleInputAndTagSelectBottomSheetBuilder(getActivity())
+                .passage(mTranslationService.getCurrentPassage())
+                .saveCallback(new TitleInputAndTagSelectBottomSheetBuilder.OnSaveButtonClickCallback() {
                     @Override
-                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        TranslationService.getInstance().insertPassage(input.toString(), "");
+                    public void onClick(String title, Set<Integer> selectedPositions) {
+                        doInsertingNewPassage(title, TextUtils.join(" ", selectedPositions));
+                        dialog.dismiss();
                     }
                 })
-                .show();
+                .build());
+        dialog.show();
+    }
+
+    private void doInsertingNewPassage(String title, String tag) {
+        mTranslationService.insertPassage(title, tag)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<PutResult>() {
+                    @Override
+                    public void call(PutResult result) {
+                        if (result.wasInserted()) {
+                            Toast.makeText(getActivity(), R.string.saved, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private TextInsideCircleButton.Builder buildMenuButton(int resId, int colorRes, int textRes) {
@@ -151,7 +169,7 @@ public class TranslationFragment extends Fragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                TranslationService.getInstance().submitSourceText();
+                mTranslationService.submitSourceText();
             }
         });
     }
@@ -179,47 +197,65 @@ public class TranslationFragment extends Fragment {
         mViewPager.setCurrentItem(1 - mViewPager.getCurrentItem());
     }
 
+
     @LongClick(R.id.text_translate_from)
     @Click(R.id.icon_select_source_format)
     void showSourceLanguageDialog() {
-        final BubblePopupMenu menu = new BubblePopupMenu(getActivity(), mFormatOptions);
-        menu.setWidth(Util.dp2px(150));
-        menu.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        menu.setOnItemClickListener(new BubblePopupMenu.OnItemClickListener() {
+        if (mShowingMenu != null) {
+            mShowingMenu.dismiss();
+            return;
+        }
+        mShowingMenu = buildPopupMenu(mFormatOptions);
+        mShowingMenu.setOnItemClickListener(new BubblePopupMenu.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 setSourceFormat(position);
-                menu.dismiss();
+                mShowingMenu.dismiss();
             }
         });
-        menu.showAsDropDown(mTranslationFromUnderline, -menu.getWidth(), 0);
+        mShowingMenu.showAsDropDown(mTranslationFromUnderline, -mShowingMenu.getWidth(), 0);
+    }
+
+    private BubblePopupMenu buildPopupMenu(List<String> options) {
+        BubblePopupMenu menu = new BubblePopupMenu(getActivity(), options);
+        menu.setWidth(Util.dp2px(150));
+        menu.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        menu.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                mShowingMenu = null;
+            }
+        });
+        return menu;
     }
 
     @LongClick(R.id.text_translate_to)
     @Click(R.id.icon_select_target_language)
     void showTargetLanguageDialog() {
-        final BubblePopupMenu menu = new BubblePopupMenu(getActivity(), OOXX_OPTIONS);
-        menu.setWidth(Util.dp2px(150));
-        menu.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        menu.setOnItemClickListener(new BubblePopupMenu.OnItemClickListener() {
+        if (mShowingMenu != null) {
+            mShowingMenu.dismiss();
+            return;
+        }
+        mShowingMenu = buildPopupMenu(OOXX_OPTIONS);
+        mShowingMenu.setOnItemClickListener(new BubblePopupMenu.OnItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 setOOXXInterval(position);
-                menu.dismiss();
+                mShowingMenu.dismiss();
             }
         });
-        menu.showAsDropDown(mTranslationToUnderline, 0, 0);
+        mShowingMenu.showAsDropDown(mTranslationToUnderline, 0, 0);
 
     }
 
     private void setOOXXInterval(int position) {
-        TranslationService.getInstance().setOOXXInterval(position);
+        mTranslationService.setOOXXInterval(position);
         mOOXX.setText(OOXX_OPTIONS.get(position));
     }
 
 
     private void setSourceFormat(int position) {
-        TranslationService.getInstance().setSourceFormat(position);
+        mTranslationService.setSourceFormat(position);
         mSourceFormat.setText(mFormatOptions.get(position));
     }
 
